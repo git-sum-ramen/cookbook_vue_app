@@ -1,18 +1,29 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>{{ message }}</h1>   
+    <!-- recipes.each do |recipe| -->
+    <div v-for="recipe in recipes">
+      {{ recipe.title }}
+    </div>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<style>
+</style>
 
+<script>
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+  data: function() {
+    return {
+      message: "Welcome to Vue.js!",
+      recipes: [
+        {id: 1, title: "Raw Eggs", chef: "Jay Wengrow"},
+        {id: 2, title: "Ice Cubes", chef: "Peter Jang"},
+        {id: 3, title: "Quinoa Salad", chef: "Brian Rice"},
+      ]
+    };
+  },
+  created: function() {},
+  methods: {}
+};
 </script>
