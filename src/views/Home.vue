@@ -2,8 +2,11 @@
   <div class="home">
     <h1>{{ message }}</h1>   
     <!-- recipes.each do |recipe| -->
+    <!-- <button v-on:click="recipesIndex()">Get Recipes</button> -->
+    
     <div v-for="recipe in recipes">
       {{ recipe.title }}
+      <hr>
     </div>
   </div>
 </template>
@@ -12,18 +15,27 @@
 </style>
 
 <script>
+import axios from 'axios';
+
 export default {
   data: function() {
     return {
       message: "Welcome to Vue.js!",
-      recipes: [
-        {id: 1, title: "Raw Eggs", chef: "Jay Wengrow"},
-        {id: 2, title: "Ice Cubes", chef: "Peter Jang"},
-        {id: 3, title: "Quinoa Salad", chef: "Brian Rice"},
-      ]
+      recipes: []
     };
   },
-  created: function() {},
-  methods: {}
+  created: function() {
+    console.log('in created');
+    this.recipesIndex();
+  },
+  methods: {
+    recipesIndex: function() {
+      console.log('recipes index..');
+      axios.get('/api/recipes').then(response => {
+        console.log(response.data);
+        this.recipes = response.data;
+      });
+    }
+  }
 };
 </script>
