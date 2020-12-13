@@ -23,12 +23,13 @@
     <dialog id="recipe-details">
       <form method="dialog">
         <h3>Hello</h3>
-        <p><strong>title:</strong> {{ currentRecipe.title }}</p>
-        <p><strong>ingredients:</strong> {{ currentRecipe.ingredients }}</p>
-        <p><strong>prep </strong>time: {{ currentRecipe.prep_time }}</p>
-        <p><strong>image </strong>url: {{ currentRecipe.image_url }}</p>
-        <p><strong>directions:</strong> {{ currentRecipe.directions }}</p>
+        <p><strong>title:</strong> <input type="text" v-model="currentRecipe.title"></p>
+        <p><strong>ingredients:</strong> <input type="text" v-model="currentRecipe.ingredients"></p>
+        <p><strong>prep </strong>time: <input type="text" v-model="currentRecipe.prep_time"></p>
+        <p><strong>image </strong>url: <input type="text" v-model="currentRecipe.image_url"></p>
+        <p><strong>directions:</strong> <input type="text" v-model="currentRecipe.directions"></p>
         <button>Close</button>
+        <button v-on:click="updateRecipe()">Update</button>
       </form>
     </dialog>
   </div>
@@ -78,6 +79,20 @@ export default {
         console.log(response.data);
         this.recipes.push(response.data);
       });
+    },
+    updateRecipe: function() {
+      var params = {
+        title: this.currentRecipe.title,
+        directions: this.currentRecipe.directions,
+        ingredients: this.currentRecipe.ingredients,
+        image_url: this.currentRecipe.image_url,
+        prep_time: this.currentRecipe.prep_time,
+      }
+      
+      console.log('updating recipe...');
+      axios.patch("/api/recipes/" + this.currentRecipe.id, params).then(response => {
+        console.log(response.data);
+      })
     },
     showRecipe: function(theRecipe) {
       console.log(theRecipe);
