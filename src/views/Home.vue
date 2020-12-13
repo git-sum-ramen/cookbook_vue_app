@@ -4,8 +4,12 @@
     <!-- <button v-on:click="recipesIndex()">Get Recipes</button> -->    
     <!-- recipes.each do |recipe| -->
     <h2>Make a new recipe</h2>
+    <p>Title:<input type="text" v-model="title"></p>
+    <p>Ingredients:<input type="text" v-model="ingredients"></p>
+    <p>directions:<input type="text" v-model="directions"></p>
+    <p>prep_time:<input type="text" v-model="prep_time"></p>
+    <p>image_url:<input type="text" v-model="image_url"></p>
     <button v-on:click="createRecipe()">Make Recipe</button>
-    
     
     <div v-for="recipe in recipes">
       {{ recipe.title }}
@@ -25,7 +29,12 @@ export default {
   data: function() {
     return {
       message: "Welcome to Vue.js!",
-      recipes: []
+      recipes: [],
+      title: "",
+      ingredients: "",
+      directions: "",
+      prep_time: "",
+      image_url: ""
     };
   },
   created: function() {
@@ -43,11 +52,11 @@ export default {
     createRecipe: function() {
       console.log('creating recipe...');
       var params = {
-        title: "oats",
-        ingredients: "the ingredients",
-        directions: "the directions",
-        prep_time: 20,
-        image_url: "the image_url"
+        title: this.title,
+        ingredients: this.ingredients,
+        directions: this.directions,
+        prep_time: this.prep_time,
+        image_url: this.image_url
       };
       axios.post('/api/recipes', params).then(response => {
         console.log(response.data);
