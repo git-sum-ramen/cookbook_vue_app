@@ -1,11 +1,12 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>   
+    <!-- <button v-on:click="recipesIndex()">Get Recipes</button> -->    
     <!-- recipes.each do |recipe| -->
-    <!-- <button v-on:click="recipesIndex()">Get Recipes</button> -->
     
     <div v-for="recipe in recipes">
       {{ recipe.title }}
+      <p><img v-bind:src="recipe.image_url" v-bind:alt="recipe.title"></p>
       <hr>
     </div>
   </div>
