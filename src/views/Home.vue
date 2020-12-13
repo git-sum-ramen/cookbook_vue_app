@@ -17,12 +17,17 @@
       {{ recipe.id }}
       {{ recipe.title }}
       <p><img v-bind:src="recipe.image_url" v-bind:alt="recipe.title"></p>
-      <button v-on:click="showRecipe()">Show more info</button>
+      <button v-on:click="showRecipe(recipe)">Show more info</button>
       <hr>
     </div>
     <dialog id="recipe-details">
       <form method="dialog">
         <h3>Hello</h3>
+        <p><strong>title:</strong> {{ currentRecipe.title }}</p>
+        <p><strong>ingredients:</strong> {{ currentRecipe.ingredients }}</p>
+        <p><strong>prep </strong>time: {{ currentRecipe.prep_time }}</p>
+        <p><strong>image </strong>url: {{ currentRecipe.image_url }}</p>
+        <p><strong>directions:</strong> {{ currentRecipe.directions }}</p>
         <button>Close</button>
       </form>
     </dialog>
@@ -44,7 +49,8 @@ export default {
       ingredients: "",
       directions: "",
       prep_time: "",
-      image_url: ""
+      image_url: "",
+      currentRecipe: {}
     };
   },
   created: function() {
@@ -73,7 +79,9 @@ export default {
         this.recipes.push(response.data);
       });
     },
-    showRecipe: function() {
+    showRecipe: function(theRecipe) {
+      console.log(theRecipe);
+      this.currentRecipe = theRecipe;
       console.log('show recipe...');
       document.querySelector("#recipe-details").showModal();
     }
