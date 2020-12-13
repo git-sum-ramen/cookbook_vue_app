@@ -10,12 +10,22 @@
     <p>prep_time:<input type="text" v-model="prep_time"></p>
     <p>image_url:<input type="text" v-model="image_url"></p>
     <button v-on:click="createRecipe()">Make Recipe</button>
+    <br>
+    
     
     <div v-for="recipe in recipes">
+      {{ recipe.id }}
       {{ recipe.title }}
       <p><img v-bind:src="recipe.image_url" v-bind:alt="recipe.title"></p>
+      <button v-on:click="showRecipe()">Show more info</button>
       <hr>
     </div>
+    <dialog id="recipe-details">
+      <form method="dialog">
+        <h3>Hello</h3>
+        <button>Close</button>
+      </form>
+    </dialog>
   </div>
 </template>
 
@@ -62,6 +72,10 @@ export default {
         console.log(response.data);
         this.recipes.push(response.data);
       });
+    },
+    showRecipe: function() {
+      console.log('show recipe...');
+      document.querySelector("#recipe-details").showModal();
     }
   }
 };
