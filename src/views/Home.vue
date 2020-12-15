@@ -4,6 +4,7 @@
     <!-- <button v-on:click="recipesIndex()">Get Recipes</button> -->    
     <!-- recipes.each do |recipe| -->
     <h2>Make a new recipe</h2>
+    <h1 v-for="error in errors">{{ error }}</h1>
     <p>Title:<input type="text" v-model="title"></p>
     <p>Ingredients:<input type="text" v-model="ingredients"></p>
     <p>directions:<input type="text" v-model="directions"></p>
@@ -52,7 +53,8 @@ export default {
       directions: "",
       prep_time: "",
       image_url: "",
-      currentRecipe: {}
+      currentRecipe: {},
+      errors: []
     };
   },
   created: function() {
@@ -79,6 +81,11 @@ export default {
       axios.post('/api/recipes', params).then(response => {
         console.log(response.data);
         this.recipes.push(response.data);
+      }).catch(error => {
+        console.log("you messed up");
+        console.log(error.response.data.errors);
+        // show user errors
+        this.errors = error.response.data.errors;
       });
     },
     updateRecipe: function() {
