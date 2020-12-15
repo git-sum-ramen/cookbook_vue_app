@@ -30,6 +30,7 @@
         <p><strong>directions:</strong> <input type="text" v-model="currentRecipe.directions"></p>
         <button>Close</button>
         <button v-on:click="updateRecipe()">Update</button>
+        <button v-on:click="destroyRecipe()">Remove</button>
       </form>
     </dialog>
   </div>
@@ -99,6 +100,19 @@ export default {
       this.currentRecipe = theRecipe;
       console.log('show recipe...');
       document.querySelector("#recipe-details").showModal();
+    },
+    destroyRecipe: function() {
+      console.log('destroy recipe...');
+      // making the correct request to rails
+      axios.delete('/api/recipes/' + this.currentRecipe.id).then(response => {
+        console.log(response.data);
+        // remove the recipe from the array
+        // find the correct index in the array
+        var index = this.recipes.indexOf(this.currentRecipe);
+        console.log(index);
+        // delete at that index
+        this.recipes.splice(index, 1);
+      })
     }
   }
 };
