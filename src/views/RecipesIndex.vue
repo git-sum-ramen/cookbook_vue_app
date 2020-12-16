@@ -6,6 +6,10 @@
     <!-- <h1>{{ recipes }}</h1> -->
     <div v-for="recipe in recipes">
       <p>{{ recipe.title }}</p>
+       <!-- <router-link v-bind:to="'/recipes/' + recipe.id"> -->
+       <router-link v-bind:to="`/recipes/${recipe.id}`">
+        <img v-bind:src="recipe.image_url">
+      </router-link>
     </div>
   </div>
 </template>
