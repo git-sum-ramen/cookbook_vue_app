@@ -6,7 +6,7 @@
     <h1>directions: {{ recipe.directions }}</h1>
     <h1>prep_time: {{ recipe.prep_time }}</h1>
     <h1>image_url: {{ recipe.image_url }}</h1>
-    <h1>chef: {{ recipe.user.email }}</h1>
+    <!-- <h1>chef: {{ recipe.user.email }}</h1> -->
   </div>
 </template>
 
@@ -28,7 +28,8 @@ export default {
   methods: {
     recipesShow: function() {
       console.log('in recipes show');
-      axios.get('/api/recipes/41').then(response => {
+      console.log(this.$route.params.id);
+      axios.get('/api/recipes/' + this.$route.params.id).then(response => {
         console.log(response.data); 
         this.recipe = response.data;
       })
