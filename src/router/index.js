@@ -16,15 +16,18 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  { path: "/logout",
+  { 
+    path: "/logout",
     name: "logout",
     component: Logout 
   },
-  { path: "/recipes/new",
+  { 
+    path: "/recipes/new",
     name: "recipes-new",
     component: RecipesNew
   },
-  { path: "/recipes",
+  { 
+    path: "/recipes",
     name: "recipes-index",
     component: RecipesIndex
   },
