@@ -1,13 +1,15 @@
 <template>
   <div class="recipes-show">
-    <h1>{{ message }}</h1>
-    <h1>title: {{ recipe.title }}</h1>
-    <h1>ingredients: {{ recipe.ingredients }}</h1>
-    <h1>directions: {{ recipe.directions }}</h1>
-    <h1>prep_time: {{ recipe.prep_time }}</h1>
-    <h1>image_url: {{ recipe.image_url }}</h1>
+    <h6>{{ message }}</h6>
+    <h6>title: {{ recipe.title }}</h6>
+    <h6>ingredients: {{ recipe.ingredients }}</h6>
+    <h6>directions: {{ recipe.directions }}</h6>
+    <h6>prep_time: {{ recipe.prep_time }}</h6>
+    <h6>image_url: {{ recipe.image_url }}</h6>
     <!-- <h1>chef: {{ recipe.user.email }}</h1> -->
     <router-link v-bind:to="`/recipes/${recipe.id}/edit`">Edit</router-link>
+    <br>
+    <button v-on:click="recipesDestroy()">Delete</button>
 
   </div>
 </template>
@@ -36,6 +38,13 @@ export default {
       axios.get('/api/recipes/' + this.$route.params.id).then(response => {
         console.log(response.data); 
         this.recipe = response.data;
+      })
+    },
+    recipesDestroy: function() {
+      console.log('destroying reciep...');
+      axios.delete(`/api/recipes/${this.recipe.id}`).then(response => {
+        console.log(response.data);
+        this.$router.push("/recipes");
       })
     }
   }
