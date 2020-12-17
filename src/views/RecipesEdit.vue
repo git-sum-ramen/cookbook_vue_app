@@ -7,23 +7,23 @@
       </ul>
       <div class="form-group">
         <label>Title:</label> 
-        <input type="text" class="form-control" v-model="title">
+        <input type="text" class="form-control" v-model="recipe.title">
       </div>
       <div class="form-group">
         <label>Ingredients:</label>
-        <input type="text" class="form-control" v-model="ingredients">
+        <input type="text" class="form-control" v-model="recipe.ingredients">
       </div>
       <div class="form-group">
         <label>Directions:</label>
-        <input type="text" class="form-control" v-model="directions">
+        <input type="text" class="form-control" v-model="recipe.directions">
       </div>
       <div class="form-group">
         <label>Prep Time:</label>
-        <input type="text" class="form-control" v-model="prepTime">
+        <input type="text" class="form-control" v-model="recipe.prep_time">
       </div>
       <div class="form-group">
         <label>Image Url:</label>
-        <input type="text" class="form-control" v-model="imageUrl">
+        <input type="text" class="form-control" v-model="recipe.image_url">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
@@ -36,11 +36,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      title: "",
-      ingredients: "",
-      directions: "",
-      prepTime: "",
-      imageUrl: "",
+      recipe: {},
       errors: []
     };
   },
@@ -51,11 +47,11 @@ export default {
   methods: {
     submit: function() {
       var params = {
-        title: this.title,
-        ingredients: this.ingredients,
-        directions: this.directions,
-        prep_time: this.prepTime,
-        image_url: this.imageUrl,
+        title: this.recipe.title,
+        ingredients: this.recipe.ingredients,
+        directions: this.recipe.directions,
+        prep_time: this.recipe.prep_time,
+        image_url: this.recipe.image_url,
       };
       axios
         .patch("/api/recipes/" + this.$route.params.id, params)
@@ -70,11 +66,12 @@ export default {
       // get data to prepopulate the form
       axios.get('/api/recipes/' + this.$route.params.id).then(response => {
         console.log(response.data);
-        this.title = response.data.title;
-        this.ingredients = response.data.ingredients;
-        this.directions = response.data.directions;
-        this.prepTime = response.data.prep_time;
-        this.imageUrl = response.data.image_url;
+        this.recipe = response.data;
+        // this.title = response.data.title;
+        // this.ingredients = response.data.ingredients;
+        // this.directions = response.data.directions;
+        // this.prepTime = response.data.prep_time;
+        // this.imageUrl = response.data.image_url;
       })
     }
   }
