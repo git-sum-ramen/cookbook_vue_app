@@ -7,6 +7,8 @@
     <h1>prep_time: {{ recipe.prep_time }}</h1>
     <h1>image_url: {{ recipe.image_url }}</h1>
     <!-- <h1>chef: {{ recipe.user.email }}</h1> -->
+    <router-link v-bind:to="`/recipes/${recipe.id}/edit`">Edit</router-link>
+
   </div>
 </template>
 
@@ -14,6 +16,8 @@
 </style>
 
 <script>
+
+
 import axios from 'axios'
 export default {
   data: function() {
