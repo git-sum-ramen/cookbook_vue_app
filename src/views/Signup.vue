@@ -8,6 +8,7 @@
       <div class="form-group">
         <label>Name:</label> 
         <input type="text" class="form-control" v-model="name">
+        <small>{{ 20 - name.length }} characters remaining</small>
       </div>
       <div class="form-group">
         <label>Email:</label>
@@ -16,10 +17,14 @@
       <div class="form-group">
         <label>Password:</label>
         <input type="password" class="form-control" v-model="password">
+        <small class="text-danger" v-if="password.length < 6">Password is too short</small>        
+        <small v-if="password.length <= 20 && password.length > 6">{{ 20 - password.length }} characters remaining</small>
+        <small class="text-danger" v-if="password.length > 20">Your password is too long</small>
       </div>
       <div class="form-group">
         <label>Password confirmation:</label>
         <input type="password" class="form-control" v-model="passwordConfirmation">
+        <small v-if="password !== passwordConfirmation">Passwords don't match</small>
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
