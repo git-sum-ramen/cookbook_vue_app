@@ -4,7 +4,10 @@
   <div class="recipes-index">
     <!-- <h1>{{ recipes }}</h1> -->    
     <!-- <div v-for="recipe in recipes"> -->
-    <p>Search: <input type="text" v-model="searchTerm"></p>
+    <p>Search: <input type="text" v-model="searchTerm" list="titles"></p>     
+      <datalist id="titles">
+        <option v-for="recipe in recipes">{{ recipe.title }}</option>
+      </datalist>
     <div v-for="recipe in orderBy(filterBy(recipes, searchTerm, 'title'), 'title')">
     <!-- <div v-for="recipe in orderBy(recipes, 'title', 1)"> -->
       <p>{{ recipe.title }}</p>
