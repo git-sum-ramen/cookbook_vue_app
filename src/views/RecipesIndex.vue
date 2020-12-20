@@ -2,7 +2,6 @@
 
 <template>
   <div class="recipes-index">
-    <h1>{{ message }}</h1>
     <!-- <h1>{{ recipes }}</h1> -->
     <div v-for="recipe in recipes">
       <p>{{ recipe.title }}</p>
@@ -37,7 +36,7 @@ export default {
         console.log(response.data);
         this.recipes = response.data;
       })
-    }
+    }    
   }
 };
 </script>

@@ -19,10 +19,10 @@
                 Dropdown
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li v-if="!isLoggedIn()"><a class="dropdown-item" href="/login">Login</a></li>
+                <li v-if="isLoggedIn()"><a class="dropdown-item" href="/logout">Logout</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li v-if="!isLoggedIn()"><a class="dropdown-item" href="/signup">Signup</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -37,6 +37,7 @@
       </div>
     </nav>    
     <div class="container">
+      <h1>Logged in? {{ isLoggedIn() }}</h1>
       <router-view/>
     </div>
       
@@ -49,3 +50,18 @@ body {
   /* background-image: url('./assets/moroccan-flower-dark.png'); */
 }
 </style>
+
+
+<script>
+export default {
+  methods: {
+    isLoggedIn: function() {
+      if (localStorage.getItem("jwt")) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }  
+}
+</script>
