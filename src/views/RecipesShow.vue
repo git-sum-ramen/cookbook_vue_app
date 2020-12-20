@@ -7,9 +7,13 @@
     <h6>prep_time: {{ recipe.prep_time }}</h6>
     <h6>image_url: {{ recipe.image_url }}</h6>
     <!-- <h1>chef: {{ recipe.user.email }}</h1> -->
-    <router-link v-bind:to="`/recipes/${recipe.id}/edit`">Edit</router-link>
+    <h1>User Id? {{ $parent.getUserId() }}</h1>
+    <h1>User Id of the recipe? {{ recipe.user_id }}</h1>
+    
+    <!-- <p v-if="getUserId() === recipe.user_id">The user should be able to edit this</p> -->
+    <router-link v-if="$parent.getUserId() == recipe.user_id" v-bind:to="`/recipes/${recipe.id}/edit`">Edit</router-link>
     <br>
-    <button v-on:click="recipesDestroy()">Delete</button>
+    <button v-if="$parent.getUserId() == recipe.user_id" v-on:click="recipesDestroy()">Delete</button>
 
   </div>
 </template>
