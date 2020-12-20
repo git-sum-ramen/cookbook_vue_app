@@ -5,6 +5,7 @@
     <!-- <h1>{{ recipes }}</h1> -->    
     <!-- <div v-for="recipe in recipes"> -->
     <div v-for="recipe in filterBy(recipes, searchTerm, 'title')">
+    <!-- <div v-for="recipe in orderBy(recipes, 'title', 1)"> -->
       <p>{{ recipe.title }}</p>
        <!-- <router-link v-bind:to="'/recipes/' + recipe.id"> -->
        <router-link v-bind:to="`/recipes/${recipe.id}`">
