@@ -2,6 +2,7 @@
   <div class="signup">
     <form v-on:submit.prevent="submit()">
       <h1>Signup</h1>
+      
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
       </ul>
@@ -23,7 +24,7 @@
       </div>
       <div class="form-group">
         <label>Password confirmation:</label>
-        <input type="password" class="form-control" v-model="passwordConfirmation">
+        <input type="password" class="form-control" v-model="passwordConfirmation" maxlength="5">
         <small v-if="password !== passwordConfirmation">Passwords don't match</small>
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
