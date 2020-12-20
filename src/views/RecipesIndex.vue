@@ -4,7 +4,8 @@
   <div class="recipes-index">
     <!-- <h1>{{ recipes }}</h1> -->    
     <!-- <div v-for="recipe in recipes"> -->
-    <div v-for="recipe in filterBy(recipes, searchTerm, 'title')">
+    <p>Search: <input type="text" v-model="searchTerm"></p>
+    <div v-for="recipe in orderBy(filterBy(recipes, searchTerm, 'title'), 'title')">
     <!-- <div v-for="recipe in orderBy(recipes, 'title', 1)"> -->
       <p>{{ recipe.title }}</p>
        <!-- <router-link v-bind:to="'/recipes/' + recipe.id"> -->

@@ -65,7 +65,7 @@ export default {
     },
     getUserId: function() {
       console.log('getting user id...');
-      // console.log(localStorage.getItem("user_id"))
+      console.log(localStorage.getItem("user_id"))
       return localStorage.getItem("user_id");
     }
   }  
