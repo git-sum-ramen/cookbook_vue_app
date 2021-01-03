@@ -20,10 +20,14 @@
 									<li><a href="#" class="button large">Full Story</a></li>
 								</ul>
 							</article>
+              <p>Search: <input type="text" v-model="searchTerm" list="titles"></p>     
+              <datalist id="titles">
+                <option v-for="recipe in recipes">{{ recipe.title }}</option>
+              </datalist>
 
 						<!-- Posts -->
 							<section class="posts">
-								<article v-for="recipe in recipes">
+								<article v-for="recipe in orderBy(filterBy(recipes, searchTerm, 'title'), 'title')">
 									<header>
 										<span class="date">{{recipe.id}}</span>
 										<h2><a href="#">{{recipe.title}}<br />
@@ -42,17 +46,10 @@
 					</div>
     <!-- <h1>{{ recipes }}</h1> -->    
     <!-- <div v-for="recipe in recipes"> -->
-    <p>Search: <input type="text" v-model="searchTerm" list="titles"></p>     
-      <datalist id="titles">
-        <option v-for="recipe in recipes">{{ recipe.title }}</option>
-      </datalist>
-    <div v-for="recipe in orderBy(filterBy(recipes, searchTerm, 'title'), 'title')">
+    
+    <div >
     <!-- <div v-for="recipe in orderBy(recipes, 'title', 1)"> -->
-      <p>{{ recipe.title }}</p>
        <!-- <router-link v-bind:to="'/recipes/' + recipe.id"> -->
-       <router-link v-bind:to="`/recipes/${recipe.id}`">
-        <img v-bind:src="recipe.image_url">
-      </router-link>
     </div>
   </div>
 </template>
